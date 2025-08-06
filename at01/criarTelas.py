@@ -1,25 +1,56 @@
-import sys #Importando biblioteca sys para manipulação de argumentos do sistema
-from PyQt5.QtWidgets import QApplication, QPushButton, QWidget, QLabel #Importando classes necessárias do PyQt5 para criar a interface gráfica
+import sys
+from PyQt5.QtWidgets import QApplication, QPushButton, QWidget, QLabel, QHBoxLayout, QVBoxLayout
 
-#Criando aplicação
-app = QApplication(sys.argv) #Instância da aplicação
+# Criando aplicação
+app = QApplication(sys.argv)
 
-#Criar janela principal 
+# Carregando QSS externo
+with open("estilo.qss", "r") as arquivo_qss:
+    estilo = arquivo_qss.read()
+    app.setStyleSheet(estilo)
+
+# Criar janela principal 
 janela = QWidget()
-janela.setWindowTitle("Primeira aplicação front em python") #Titulo da janela
-janela.setGeometry(50, 200, 350, 150) #Definindo tamanho e posição da janela
+janela.setWindowTitle("Primeira aplicação front em Python")
+janela.setGeometry(100, 200, 500, 200)
+janela.setObjectName("janelaPrincipal")
 
-#Criando um rótulo (label)
-rotulo = QLabel("Hello word!", janela) #Criando um rótulo 
-rotulo.move(130, 30) #Posicionando o rótulo na janela
+# Criando um rótulo (label)
+rotulo = QLabel("Hello world!", janela)
 
-#Criando um botão
-botao = QPushButton("Clique aqui!", janela) #Criando um botão
-botao.move(150, 70) #Posicionando o botão na janela
+# Função que será chamada ao clicar no botão
+def botaoClicado():
+    print("Botão clicado!")
 
-#Exibir a janela
-janela.show() 
+# Criando botões
+botao1 = QPushButton("Clique aqui!")
+botao1.setObjectName("botaoCustom")
+botao1.setFixedSize(120, 40)
+botao1.clicked.connect(botaoClicado)
 
-#Iniciando o loop de eventos
-sys.exit(app.exec_()) 
+botao2 = QPushButton("Meow")
+botao2.setObjectName("botaoCustom2")
+botao2.setFixedSize(120, 40)
 
+botao3 = QPushButton("Woof")
+botao3.setObjectName("botaoCustom3")
+botao3.setFixedSize(120, 40)
+
+# Layouts
+layoutPrincipal = QVBoxLayout()
+layoutBotoes = QHBoxLayout()
+
+layoutBotoes.addWidget(botao1)
+layoutBotoes.addWidget(botao2)
+layoutBotoes.addWidget(botao3)
+
+layoutPrincipal.addWidget(rotulo)
+layoutPrincipal.addLayout(layoutBotoes)
+
+janela.setLayout(layoutPrincipal)
+
+# Exibir a janela
+janela.show()
+
+# Iniciando o loop de eventos
+sys.exit(app.exec_())
