@@ -19,11 +19,8 @@ Foi utilizado o **PyQt5**, uma biblioteca popular para desenvolvimento de GUIs e
 ## 🖥️ Demonstração
 
 A aplicação exibe uma janela com:
-- Um rótulo com a mensagem **"Hello World!"**
+- Um rótulo com a mensagens diversas
 - Três botões personalizados
 - Evento que imprime no terminal quando o botão "Clique aqui!" é pressionado.
 
 ---
-
-## 📂 Estrutura do Projeto
-
