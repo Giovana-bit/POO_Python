@@ -21,6 +21,8 @@ Foi utilizado o **PyQt5**, uma biblioteca popular para desenvolvimento de GUIs e
 A aplicação exibe uma janela com:
 - Um rótulo com a mensagens diversas
 - Três botões personalizados
-- Evento que imprime no terminal quando o botão "Clique aqui!" é pressionado.
+- Evento que imprime no terminal quando o botão "Clique aqui!" é pressionado
+- -Utilização do designer para criar interface
+- Fazer teste de cadastro como uma agenda
 
 ---
