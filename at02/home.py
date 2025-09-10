@@ -1,4 +1,3 @@
-
 from PyQt5 import uic, QtWidgets
 import mysql.connector
 import os
@@ -64,21 +63,54 @@ def telaConsulta():
         for j in range(0, 5):
             listaContatos.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(contatosLidos[i][j])))
 
+# Função excluir contato
+def excluirContato():
+    linhacontato = listaContatos.tableWidget.currentRow()
+    idContato = listaContatos.tableWidget.item(linhacontato, 0).text()
+
+    cursor = banco.cursor()
+    cursor.execute("DELETE FROM contatos WHERE id = %s", (idContato,))
+    banco.commit()
+
+    listaContatos.tableWidget.removeRow(linhacontato)
+
+# Função para editar contato (ainda não implementada)
+def editarContato():
+    linhacontato = listaContatos.tableWidget.currentRow()
+
+    idContato = listaContatos.tableWidget.item(linhacontato, 0).text()
+    nomeContato = listaContatos.tableWidget.item(linhacontato, 1).text()
+    emailContato = listaContatos.tableWidget.item(linhacontato, 2).text()
+    telefoneContato = listaContatos.tableWidget.item(linhacontato, 3).text()
+    tipoTelefone = listaContatos.tableWidget.item(linhacontato, 4).text()
+
+    cursor = banco.cursor()
+    cursor.execute("UPDATE contatos SET nome = %s, email = %s, telefone = %s, tipoTelefone = %s WHERE id = %s",
+                   (nomeContato, emailContato, telefoneContato, tipoTelefone, idContato))           
+    banco.commit()
+
+def telaVoltar():
+    listaContatos.close()
+    agenda.show()
+
 # Configuração da aplicação
 app = QtWidgets.QApplication([])
 
 # Descobre automaticamente o caminho dos arquivos .ui
 base_dir = os.path.dirname(os.path.abspath(__file__))
-ui_path = os.path.join(base_dir, "..", "at02", "agenda.ui")
-ui_consulta = os.path.join(base_dir, "..", "at02", "listaContatos.ui")
+ui_path = os.path.join(base_dir, "..", "at03", "agenda.ui")
+ui_consulta = os.path.join(base_dir, "..", "at03", "listaContatos.ui")
 
-# Carrega as duas telas em variáveis diferentes
+# Carrega as duas telas
 agenda = uic.loadUi(ui_path)
 listaContatos = uic.loadUi(ui_consulta)
 
 # Ligações de eventos
 agenda.cadastrar.clicked.connect(main)
 agenda.consultar.clicked.connect(telaConsulta)
+listaContatos.delContato.clicked.connect(excluirContato) 
+listaContatos.altContato.clicked.connect(editarContato)
+listaContatos.voltar.clicked.connect(telaVoltar)
 
 agenda.show()
 app.exec()
