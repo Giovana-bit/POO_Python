@@ -40,7 +40,10 @@ O sistema permite **cadastrar contatos** e **consultar registros** armazenados n
 ### Funcionalidades principais:
 - 📌 **Cadastro de contatos**: Nome, Email, Telefone e Tipo de Telefone (Residencial ou Celular).  
 - 💾 **Armazenamento em MySQL**: uso de `mysql.connector` para persistência dos dados.  
-- 🔎 **Consulta de contatos**: listagem dos registros já cadastrados em uma tabela (QTableWidget).  
+- 🔎 **Consulta de contatos**: listagem dos registros já cadastrados em uma tabela (QTableWidget).
+- ❌ **Deletar contato**: Apagar um contato já registrado na tabela;
+- ✔️ **Editar contato**: Editar campos(`Nome`, `Email`, `Telefone` e `Tipo Telefone`) que estão registrados na tabela;
+- 📋 **Botão voltar**: Adicionado botão para sair da tela `Lista Contatos` e retornar para a tela `Agenda`;
 - 🎨 **Interface gráfica (PyQt5)**: criada via Qt Designer (`.ui`) e estilizada com QSS.  
 - 🖥️ **Múltiplas telas**: `agenda.ui` para cadastro e `listaContatos.ui` para consulta.  
 
